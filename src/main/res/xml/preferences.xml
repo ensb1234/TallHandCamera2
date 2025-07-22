@@ -1,0 +1,254 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:iconSpaceReserved="false">
+
+    <PreferenceCategory
+        android:title="扫描方案"
+        android:key="scanning_scheme"
+        android:layout="@layout/preference_category_th"
+        app:iconSpaceReserved="false">
+
+        <com.scl.tallhandcamera2.EditTxtPref
+            android:title="导入..."
+            android:key="import_scheme"
+            android:dialogLayout="@layout/preference_dialog_edittext_multiline"
+            android:dialogTitle="请导入序列："
+            app:iconSpaceReserved="false"/>
+        <Preference
+            android:title="导出..."
+            android:key="export_scheme"
+            app:iconSpaceReserved="false"/>
+        <Preference
+            android:title="重置当前方案"
+            android:key="reset_current_scheme"
+            app:iconSpaceReserved="false"/>
+        <Preference
+            android:title="使用说明"
+            android:key="instruction"
+            app:iconSpaceReserved="false"/>
+        <Preference
+            android:title="查看答题状况"
+            android:key="answering_status"
+            app:iconSpaceReserved="false"/>
+
+        <Preference
+            android:title="点击开始>>"
+            android:key="start_btn"
+            android:enabled="false"
+            android:layout="@layout/preference_th"
+            app:iconSpaceReserved="false"/>
+
+        <Preference
+            android:title="退出程序"
+            android:key="exit_btn"
+            android:layout="@layout/preference_th"
+            app:iconSpaceReserved="false"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="相机设置"
+        android:layout="@layout/preference_category_th"
+        android:summary="请至少设置以下四项，方可点击开始"
+        app:iconSpaceReserved="false">
+
+        <ListPreference
+            android:defaultValue="camera2"
+            android:entries="@array/camera_api"
+            android:entryValues="@array/camera_api"
+            android:key="camera_api"
+            android:title="相机API"
+            android:summary="camera2"
+            app:useSimpleSummaryProvider="true"
+            app:iconSpaceReserved="false"/>
+
+        <ListPreference
+            android:key="camera_id"
+            android:title="相机ID"
+            android:enabled="false"
+            app:useSimpleSummaryProvider="true"
+            app:iconSpaceReserved="false"/>
+
+        <ListPreference
+            android:key="camera_size"
+            android:title="相机画面尺寸（像素）"
+            android:enabled="false"
+            app:useSimpleSummaryProvider="true"
+            app:iconSpaceReserved="false"/>
+
+        <ListPreference
+            android:key="camera_fps_range"
+            android:title="相机帧率（帧/秒）"
+            android:enabled="false"
+            app:useSimpleSummaryProvider="true"
+            app:iconSpaceReserved="false"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="参照图及原型图位置尺寸"
+        android:layout="@layout/preference_category_th"
+        android:summary="以下六项请务必统一单位，只需填写数字"
+        app:iconSpaceReserved="false">
+
+        <com.scl.tallhandcamera2.EditTxtPref
+            android:key="reference_width"
+            android:title="参照图宽"
+            android:dialogTitle="请输入正整数："
+            app:useSimpleSummaryProvider="true"
+            app:iconSpaceReserved="false"/>
+        <com.scl.tallhandcamera2.EditTxtPref
+            android:key="reference_height"
+            android:title="参照图高"
+            android:dialogTitle="请输入正整数："
+            app:useSimpleSummaryProvider="true"
+            app:iconSpaceReserved="false"/>
+
+        <com.scl.tallhandcamera2.EditTxtPref
+            android:key="proto_width"
+            android:title="原型图宽"
+            android:dialogTitle="请输入正整数："
+            app:useSimpleSummaryProvider="true"
+            app:iconSpaceReserved="false"/>
+        <com.scl.tallhandcamera2.EditTxtPref
+            android:key="proto_height"
+            android:title="原型图高"
+            android:dialogTitle="请输入正整数："
+            app:useSimpleSummaryProvider="true"
+            app:iconSpaceReserved="false"/>
+
+        <com.scl.tallhandcamera2.EditTxtPref
+            android:key="proto_x"
+            android:title="原型图X坐标"
+            android:dialogTitle="请输入整数："
+            app:useSimpleSummaryProvider="true"
+            app:iconSpaceReserved="false"/>
+        <com.scl.tallhandcamera2.EditTxtPref
+            android:key="proto_y"
+            android:title="原型图Y坐标"
+            android:dialogTitle="请输入整数："
+            app:useSimpleSummaryProvider="true"
+            app:iconSpaceReserved="false"/>
+
+        <Preference
+            android:title="点击逆转90度"
+            android:key="rotate_btn"
+            android:layout="@layout/preference_th"
+            app:iconSpaceReserved="false"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="扫描器设置"
+        android:layout="@layout/preference_category_th"
+        android:summary=""
+        app:iconSpaceReserved="false">
+
+        <com.scl.tallhandcamera2.EditTxtPref
+            android:key="scanning_interval"
+            android:title="扫描间隔（帧）"
+            android:dialogTitle="请输入大于等于10的整数："
+            app:useSimpleSummaryProvider="true"
+            app:iconSpaceReserved="false"/>
+
+        <ListPreference
+            android:defaultValue="CALC_AREA"
+            android:entries="@array/scanning_mode"
+            android:entryValues="@array/scanning_mode_value"
+            android:key="scanning_mode"
+            android:title="参照图定位模式"
+            app:useSimpleSummaryProvider="true"
+            app:iconSpaceReserved="false"/>
+
+        <com.scl.tallhandcamera2.EditTxtPref
+            android:key="block_size"
+            android:title="二值化扫描块大小"
+            android:dialogTitle="请输入正整数："
+            app:useSimpleSummaryProvider="true"
+            app:iconSpaceReserved="false"/>
+
+        <com.scl.tallhandcamera2.EditTxtPref
+            android:key="c"
+            android:title="C值"
+            android:dialogTitle="请输入大于0的浮点数："
+            app:useSimpleSummaryProvider="true"
+            app:iconSpaceReserved="false"/>
+
+        <com.scl.tallhandcamera2.EditTxtPref
+            android:key="pic_similar_tolerance"
+            android:title="相似图判定容许偏差"
+            android:dialogTitle="请输入大于0且小于64的整数："
+            app:useSimpleSummaryProvider="true"
+            app:iconSpaceReserved="false"/>
+
+        <com.scl.tallhandcamera2.EditTxtPref
+            android:key="reference_hash"
+            android:title="参照图特征码"
+            android:dialogTitle="请输入64位整数的16进制码："
+            android:dialogLayout="@layout/preference_dialog_edittext_hex"
+            app:useSimpleSummaryProvider="true"
+            app:iconSpaceReserved="false"/>
+
+        <ListPreference
+            android:defaultValue="ADJACENT_DIFF"
+            android:entries="@array/black_block_reasoning_mode"
+            android:entryValues="@array/black_block_reasoning_mode_value"
+            android:key="black_block_reasoning_mode"
+            android:title="黑格推理模式"
+            app:useSimpleSummaryProvider="true"
+            app:iconSpaceReserved="false"/>
+
+        <com.scl.tallhandcamera2.EditTxtPref
+            android:key="adjacent_diff_starting_index"
+            android:title="邻差法起始索引"
+            android:dialogTitle="请输入正整数或0："
+            app:useSimpleSummaryProvider="true"
+            app:iconSpaceReserved="false"/>
+
+        <com.scl.tallhandcamera2.EditTxtPref
+            android:key="no_use_step_meaning"
+            android:title="无用阶定义"
+            android:dialogTitle="请输入正整数或0："
+            app:useSimpleSummaryProvider="true"
+            app:iconSpaceReserved="false"/>
+
+        <com.scl.tallhandcamera2.EditTxtPref
+            android:key="first_step_multiple"
+            android:title="首阶陡然倍率"
+            android:dialogTitle="请输入大于0的浮点数："
+            app:useSimpleSummaryProvider="true"
+            app:iconSpaceReserved="false"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="网格编辑工具"
+        android:layout="@layout/preference_category_th"
+        android:summary=""
+        app:iconSpaceReserved="false">
+        <com.scl.tallhandcamera2.EditTxtPref
+            android:title="所有网格特征码"
+            android:key="features"
+            android:dialogLayout="@layout/preference_dialog_edittext_multiline"
+            android:dialogTitle="请导入特征码："
+            app:useSimpleSummaryProvider="true"
+            app:iconSpaceReserved="false"/>
+        <com.scl.tallhandcamera2.SortableListPref
+            android:key="editing"
+            android:title="当前对象"
+            app:iconSpaceReserved="false"/>
+        <Preference
+            android:key="answers"
+            android:title="答案"
+            app:useSimpleSummaryProvider="true"
+            app:iconSpaceReserved="false"/>
+        <com.scl.tallhandcamera2.EditTxtPref
+            android:key="score_set"
+            android:title="给分表达式"
+            android:dialogTitle="请配置："
+            android:dialogLayout="@layout/preference_dialog_edittext_multiline"
+            app:useSimpleSummaryProvider="true"
+            app:iconSpaceReserved="false"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>

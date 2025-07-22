@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="camera_api">
+        <item>camera1</item>
+        <item>camera2</item>
+    </string-array>
+
+    <string-array name="scanning_mode">
+        <item>面积法</item>
+        <item>数轮廓法</item>
+    </string-array>
+    <string-array name="scanning_mode_value">
+        <item>CALC_AREA</item>
+        <item>COUNT_CONTOURS</item>
+    </string-array>
+
+    <string-array name="black_block_reasoning_mode">
+        <item>邻差法</item>
+        <item>对比法</item>
+    </string-array>
+    <string-array name="black_block_reasoning_mode_value">
+        <item>ADJACENT_DIFF</item>
+        <item>COMPARE</item>
+    </string-array>
+
+    <string-array name="take_pic_mode">
+        <item>卷面原型拓印</item>
+        <item>卷面原型再览</item>
+        <item>答卷自动拓印</item>
+        <item>答卷手动拓印</item>
+    </string-array>
+    <string-array name="take_pic_mode_value">
+        <item>TAKE_PROTO</item>
+        <item>LOOK_PROTO</item>
+        <item>AUTO_TAKE</item>
+        <item>MANUAL_TAKE</item>
+    </string-array>
+</resources>

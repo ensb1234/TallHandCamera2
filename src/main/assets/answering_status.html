@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>各选项选中人数对比</title>
+		<style>
+			body {
+				font-family: Arial, sans-serif;
+				padding: 20px;
+				background-color: #f9f9f9;
+			}
+
+			h2 {
+				margin-top: 40px;
+			}
+
+			.chart {
+				margin: 10px 0;
+			}
+
+			.bar-container {
+				display: flex;
+				align-items: center;
+				margin: 5px 0;
+			}
+
+			.label {
+				width: 50px;
+				font-weight: bold;
+			}
+
+			.bar {
+				height: 20px;
+				background-color: #36a2eb;
+				color: white;
+				text-align: right;
+				padding-right: 5px;
+				font-size: 12px;
+				white-space: nowrap;
+				overflow: hidden;
+			}
+
+			.bar-background {
+				flex: 1;
+				background-color: #e0e0e0;
+				height: 20px;
+				position: relative;
+				border-radius: 3px;
+				overflow: hidden;
+			}
+
+			.bar-inner {
+				height: 100%;
+				background-color: #36a2eb;
+				text-align: right;
+				padding-right: 5px;
+				color: white;
+				font-size: 12px;
+				line-height: 20px;
+				white-space: nowrap;
+			}
+		</style>
+		<script type="text/javascript">
+			function fetchDataFromAndroid() {
+				Android.getRoomData(); // 调用 Android 提供的方法
+			}
+
+			function handleData(data) {
+				console.log("Received data from Android:", data);
+				//document.getElementById("output").innerText = JSON.stringify(data, null, 2);
+				document.getElementById("jsonData").innerText = JSON.stringify(data, null, 2);
+				updateCharts();
+			}
+		</script>
+	</head>
+	<body>
+		<h1>各选项选中人数对比</h1>
+		<!-- <button onclick="fetchDataFromAndroid()">Load Room Data</button> -->
+		<pre id="output"></pre>
+		<!-- 图表容器，动态插入 -->
+		<div id="charts"></div>
+
+		<!-- 嵌入式数据 -->
+		<script type="application/json" id="jsonData">
+			[{
+					"question_number": "1",
+					"answer": "A",
+					"answer_count": 120
+				},
+				{
+					"question_number": "1",
+					"answer": "B",
+					"answer_count": 80
+				},
+				{
+					"question_number": "1",
+					"answer": "C",
+					"answer_count": 50
+				},
+				{
+					"question_number": "1",
+					"answer": "D",
+					"answer_count": 30
+				},
+				{
+					"question_number": "2",
+					"answer": "A",
+					"answer_count": 70
+				},
+				{
+					"question_number": "2",
+					"answer": "B",
+					"answer_count": 110
+				},
+				{
+					"question_number": "2",
+					"answer": "C",
+					"answer_count": 60
+				}
+			]
+		</script>
+
+		<script>
+			document.addEventListener('DOMContentLoaded', ()=>{
+				Android.getRoomData(); // 调用 Android 提供的方法
+			});
+			function updateCharts() {
+				const jsonData = JSON.parse(document.getElementById('jsonData').textContent);
+				// 按question_number分组
+				const grouped = {};
+				jsonData.forEach(item => {
+					if (!grouped[item.question_number]) {
+						grouped[item.question_number] = [];
+					}
+					grouped[item.question_number].push(item);
+				});
+
+				const container = document.getElementById('charts');
+
+				Object.keys(grouped).forEach(questionNumber => {
+					const data = grouped[questionNumber];
+
+					// 计算最大值用于比例计算
+					const max = Math.max(...data.map(d => d.answer_count));
+
+					// 创建图表区域
+					const chartDiv = document.createElement('div');
+					chartDiv.innerHTML = `<h2>题号 ${questionNumber}</h2>`;
+					data.forEach(option => {
+						const percent = (option.answer_count / max) * 100;
+
+						const barHTML = `
+						  <div class="chart">
+							<div class="bar-container">
+							  <div class="label">${option.answer}</div>
+							  <div class="bar-background">
+								<div class="bar-inner" style="width: ${percent}%">
+								  ${option.answer_count}
+								</div>
+							  </div>
+							</div>
+						  </div>
+						`;
+						chartDiv.innerHTML += barHTML;
+					});
+
+					container.appendChild(chartDiv);
+				});
+			}
+		</script>
+
+	</body>
+</html>
