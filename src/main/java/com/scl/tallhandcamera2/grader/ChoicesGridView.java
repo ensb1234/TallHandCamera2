@@ -39,7 +39,8 @@ public class ChoicesGridView extends View implements View.OnTouchListener {
     private final Paint paintFillAns = new Paint();//答案填充
     private final Paint paintLineBorder = new Paint();//外框
     private final Paint paintFillInside = new Paint();//默认底色填充
-    private final Paint paintLineTester = new Paint();//考生答案外框
+    private final Paint paintLineTesterIncorrect = new Paint();//考生答案外框（错误答案）
+    private final Paint paintLineTesterCorrect = new Paint();//考生答案外框（正确答案）
     private static final int ICON_DIAMETER = 60;
     private Drawable da_add;
     private Drawable da_sub;
@@ -78,9 +79,12 @@ public class ChoicesGridView extends View implements View.OnTouchListener {
         paintFillInside.setStyle(Paint.Style.FILL);
         paintFillInside.setColor(0x400068b7);
         //考生答案格子填充
-        paintLineTester.setStyle(Paint.Style.STROKE);
-        paintLineTester.setColor(0xffff0000);
-        paintLineTester.setStrokeWidth(5.0f);
+        paintLineTesterIncorrect.setStyle(Paint.Style.STROKE);
+        paintLineTesterIncorrect.setColor(0xffff0000);
+        paintLineTesterIncorrect.setStrokeWidth(5.0f);
+        paintLineTesterCorrect.setStyle(Paint.Style.STROKE);
+        paintLineTesterCorrect.setColor(0xff60bf60);
+        paintLineTesterCorrect.setStrokeWidth(5.0f);
         //图标资源引用
         da_add = ContextCompat.getDrawable(getContext(), R.drawable.add);
         da_sub = ContextCompat.getDrawable(getContext(), R.drawable.sub);
@@ -203,8 +207,14 @@ public class ChoicesGridView extends View implements View.OnTouchListener {
                 top = rowspacing * ((int) Math.floor((double) answer / colsCount));
                 right = left + colspacing;
                 bottom = top + rowspacing;
-                canvas.drawRect(left, top, right, bottom, paintLineTester);
-                canvas.drawLine(left, top, right, bottom, paintLineTester);
+                if(answers.contains(answer)){
+                    //如果该答案是正确答案，则绘制为绿色；否则绘制为红色。
+                    canvas.drawRect(left, top, right, bottom, paintLineTesterCorrect);
+                    canvas.drawLine(left, top, right, bottom, paintLineTesterCorrect);
+                }else{
+                    canvas.drawRect(left, top, right, bottom, paintLineTesterIncorrect);
+                    canvas.drawLine(left, top, right, bottom, paintLineTesterIncorrect);
+                }
             }
         }
         //绘制九图标
@@ -771,11 +781,7 @@ public class ChoicesGridView extends View implements View.OnTouchListener {
         int r = matchInt(strings[2], "r(\\d+)");
         int c = matchInt(strings[2], "c(\\d+)");
         //最后输出
-        if(strings[3].charAt(0) == 'L'){
-            return getXYPoints(x, y, h, w, r, c);
-        }else{
-            return getXYPoints(x, y, h, w, c, r);
-        }
+        return getXYPoints(x, y, h, w, r, c);
     }
 
     /**

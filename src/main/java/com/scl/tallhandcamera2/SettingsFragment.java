@@ -12,6 +12,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -254,6 +255,7 @@ public class SettingsFragment extends PreferenceFragmentCompat implements Prefer
                         sp.getString(FEATURES, "")
                 ));
                 clipboard.setPrimaryClip(clip);
+                Toast.makeText(requireActivity().getApplicationContext(), "已导出到剪贴板。", Toast.LENGTH_SHORT).show();
                 break;
             case RESET_CURRENT_SCHEME:
                 ed.putString(SCANNING_INTERVAL, "");
